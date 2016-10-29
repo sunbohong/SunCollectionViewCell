@@ -14,6 +14,14 @@
     @implementation SunCollectionViewCell_ ## _name_ @end
 #endif
 
+#define Identifier(_Class_) \
+    static NSString *reuse ## _Class_ ## Identifier; \
+    static dispatch_once_t onceToken ## _Class_; \
+    dispatch_once(&onceToken ## _Class_, ^{ \
+        reuse ## _Class_ ## Identifier = NSStringFromClass([_Class_ class]); \
+    });
+
+
 @interface SunCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong, readonly) UIImageView *imageView;
